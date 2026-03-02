@@ -2,3 +2,7 @@
 err_*
 out_*
 log_*
+logs
+done_logs
+done_logs_mini
+
