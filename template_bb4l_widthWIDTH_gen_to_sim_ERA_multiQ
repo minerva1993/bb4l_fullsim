@@ -1,0 +1,15 @@
+JobBatchName = "bb4l_widthWIDTH_gen_to_sim_ERA"
+Executable  = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/run_bb4l_ERA_gen_to_sim.sh
+Log         = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/log_$(Cluster)_$(Process).txt
+Output      = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/out_$(Cluster)_$(Process).txt
+Error       = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/err_$(Cluster)_$(Process).txt
+Args        = "INPUT $(FILENUMBER) $(SKIPEVENT) MAXEVENT $(OUTNUMBER) $(Cluster) $(Process)"
++RequestRuntime = 604800
+RequestMemory = 4096
+RequestCpus = 1
+Request_OpSysAndVer = "RedHat9"
++CondorPlatform = "$CondorPlatform: x86_64_RedHat9 $"
++MySingularityImage = "/cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64"
++MySingularityArgs = "--bind /tmp:/host/tmp --bind /etc/pki/ca-trust --bind /cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security --bind  /cvmfs/grid.cern.ch/etc/grid-security/vomses:/etc/vomses"
+requirements = (Machine =!= "batch1061.desy.de")
+
