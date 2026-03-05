@@ -5,4 +5,10 @@ log_*
 logs
 done_logs
 done_logs_mini
-
+submit_bb4l_*
+resubmit_bb4l_width*
+out
+run_merge_twidth*
+x509up*
+*.lhe
+CMSSW*

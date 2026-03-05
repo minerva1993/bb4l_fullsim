@@ -38,8 +38,10 @@ cd CMSSW_10_6_17_patch1/src
 eval `scram runtime -sh`
 
 cp ${INPATH}/SIM_${FILENUMBER}.root ./SIM.root
-mv ../../ul18_digipremix.py .
-cmsRun ul18_digipremix.py
+#mv ../../ul18_digipremix.py .
+#cmsRun ul18_digipremix.py
+mv ../../ul18_digipremix_IIHE.py .
+cmsRun ul18_digipremix_IIHE.py
 mv Premix.root ../../
 cd ../../
 

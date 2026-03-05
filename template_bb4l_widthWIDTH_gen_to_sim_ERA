@@ -11,5 +11,4 @@ Request_OpSysAndVer = "RedHat9"
 +CondorPlatform = "$CondorPlatform: x86_64_RedHat9 $"
 +MySingularityImage = "/cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64"
 +MySingularityArgs = "--bind /tmp:/host/tmp --bind /etc/pki/ca-trust --bind /cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security --bind  /cvmfs/grid.cern.ch/etc/grid-security/vomses:/etc/vomses"
-requirements = (Machine =!= "batch1061.desy.de")
 Queue

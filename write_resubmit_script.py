@@ -32,16 +32,34 @@ missing_numbers = []
 job_id = ""
 
 if check_missing:
-    with open(options.input_file) as f:
-        for line in f:
-            line = line.strip()
-            if line.startswith("Args"):
-                content = line.split('"')[1]
-                parts = content.split()
 
-                mini_file = os.path.join(options.output, "MINIv2_%s.root" % parts[1])
-                if not os.path.exists(mini_file):
-                    missing_numbers.append(parts[1])
+    if "gen_to_sim" in options.input_file:
+
+        njobs = 0
+
+        with open(options.input_file) as f:
+            for line in f:
+                if "Queue" in line:
+                    njobs += 1
+
+        for i in range(njobs):
+            out_file = os.path.join(options.output, "SIM_%s.root" % i)
+
+            if not os.path.exists(out_file):
+                missing_numbers.append(str(i))
+
+    elif "sim_to_mini" in options.input_file:
+
+        with open(options.input_file) as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("Args"):
+                    content = line.split('"')[1]
+                    parts = content.split()
+
+                    out_file = os.path.join(options.output, "MINIv2_%s.root" % parts[1])
+                    if not os.path.exists(out_file):
+                        missing_numbers.append(parts[1])
 
 
 output_file = "re" + options.input_file
@@ -60,7 +78,9 @@ with open(options.input_file) as f:
             if line.startswith("Args"):
                 content = line.split('"')[1]
                 parts = content.split()
-                if parts[-3] in missing_numbers:
+                if "gen_to_sim" in options.input_file and parts[-3] in missing_numbers:
+                    pairs.append([options.output.split("out/")[-1].split("_")[0], job_proc])
+                elif "sim_to_mini" in options.input_file and parts[-3] in missing_numbers:
                     pairs.append([options.output.split("out/")[-1].split("_")[0], job_proc])
 
         if line == "\n":
@@ -91,7 +111,10 @@ with open(output_file, "w") as out:
             if line.startswith("Args"):
                 content = line.split('"')[1]
                 parts = content.split()
-                to_remove.append(parts[1])
+                if "gen_to_sim" in options.input_file:
+                    to_remove.append(parts[4])
+                elif "sim_to_mini" in options.input_file:
+                    to_remove.append(parts[1])
 
             line = line.replace("$(Cluster)", str(cluster))
             line = line.replace("$(Process)", str(process))

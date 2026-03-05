@@ -1,0 +1,9 @@
+per 100 events
+12M	/tmp/tmp.c0n8MRgYpk/CMSSW_10_6_17_patch1/src/GEN.root
+75M	/tmp/tmp.c0n8MRgYpk/CMSSW_10_6_17_patch1/src/SIM.root
+189M	/tmp/tmp.c0n8MRgYpk/Premix.root
+172M	/tmp/tmp.c0n8MRgYpk/CMSSW_10_6_17_patch1/src/HLT.root
+46M	/tmp/tmp.c0n8MRgYpk/CMSSW_10_6_20/src/RECO.root
+9.5M	MINIv2_0.root
+504M -> 50 GB for 10000 events
+~1hr -> 100 hr for 10000 events
