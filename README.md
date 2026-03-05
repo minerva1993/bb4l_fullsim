@@ -32,6 +32,8 @@ grep -rl -e 'Fatal Exception' -e 'atal system signal' logs/err_1727291_*_2.txt |
 
 python checkRootFiles.py -I out/
 
+python write_resubmit_script.py -I submit_bb4l_width0p7_gen_to_sim_ul18 -O out/1837091_job_b_bbar_4l_slc7_amd64_gcc700_CMSSW_10_6_39_bb4l_dl_twidthx0p7_allflavors_3_732555_SIM/
+
 !!!!!!!!Remove files and run resubmission!!!!!!!!!!
 
 

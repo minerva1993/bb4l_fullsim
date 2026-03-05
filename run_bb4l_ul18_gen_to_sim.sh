@@ -10,6 +10,7 @@ PROCESS=$7
 
 echo "starting"
 echo "shell" $0
+echo ${OUTNUMBER}
 cat /etc/os-release
 
 export SCRAM_ARCH=slc7_amd64_gcc700
