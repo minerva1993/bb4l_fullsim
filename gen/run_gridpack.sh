@@ -18,10 +18,15 @@ PNFS_OUT=${PNFS_HOME}/job_${JOBNAME}_${JOBID}
 
 OUTDIR=`realpath .`/out/job_${JOBNAME}_${JOBID}
 
+echo "Gridpack: ${GRIDPACK}"
+echo "Output directory: ${RUNDIR}"
+
 RUNDIR=`mktemp -d -p /host/tmp`
 echo "Run directory: ${RUNDIR}"
 #mkdir -p $RUNDIR
 cd $RUNDIR
+
+cat /etc/os-release
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 source /cvmfs/grid.desy.de/etc/profile.d/grid-ui-env.sh

@@ -100,4 +100,4 @@ if __name__ == '__main__':
 
         cmdline_args += opts_unknown
 
-        EXE('cmsRun ' + os.environ['CMSSW_BASE']+'/src/TopAnalysis/Configuration/analysis/common/test/ntuple_cfg.py' + ' '+(' '.join(cmdline_args)) + ' maxEvents=1000', dry_run=opts.dry_run)
+        EXE('cmsRun ' + os.environ['CMSSW_BASE']+'/src/TopAnalysis/Configuration/analysis/common/test/ntuple_cfg.py' + ' '+(' '.join(cmdline_args)), dry_run=opts.dry_run)

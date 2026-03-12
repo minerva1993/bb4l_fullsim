@@ -13,7 +13,7 @@ options = parser.parse_args()
 # check width string
 m_width = re.search(r'(twidthx[0-9p]+)', options.input)
 if not m_width:
-    print "Cannot find twidth in directory name"
+    print("Cannot find twidth in directory name")
     exit(1)
 
 twidth_tag = m_width.group(1)
@@ -21,7 +21,7 @@ twidth_tag = m_width.group(1)
 # input job number
 m_job = re.search(r'_([0-9]+)_SIM', options.input)
 if not m_job:
-    print "Cannot find job number in directory name"
+    print("Cannot find job number in directory name")
     exit(1)
 
 job_number = m_job.group(1)
@@ -39,7 +39,7 @@ for f in os.listdir(options.input):
         files.append((int(m.group(1)), f))
 
 if not files:
-    print "No MINIv2_X.root files found."
+    print("No MINIv2_X.root files found.")
     exit(1)
 
 files.sort()
@@ -71,6 +71,6 @@ with open(output_script, "w") as out:
 
         out.write(cmd)
 
-print "Created:", output_script
-print "Total input files:", len(files)
-print "Total merge jobs:", len(chunks)
+print("Created:", output_script)
+print("Total input files:", len(files))
+print("Total merge jobs:", len(chunks))

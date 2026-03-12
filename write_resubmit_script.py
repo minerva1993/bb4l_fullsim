@@ -115,6 +115,7 @@ with open(output_file, "w") as out:
                     to_remove.append(parts[4])
                 elif "sim_to_mini" in options.input_file:
                     to_remove.append(parts[1])
+                #line += 'requirements = (Machine =!= "batch1559.desy.de") && (Machine =!= "batch1166.desy.de")\n'
 
             line = line.replace("$(Cluster)", str(cluster))
             line = line.replace("$(Process)", str(process))
