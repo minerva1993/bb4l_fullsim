@@ -88,6 +88,13 @@ process.generator = cms.EDFilter("Pythia8ConcurrentHadronizerFilter",
     EV1_nFinalMode = cms.int32(2),
     EV1_nFinal = cms.int32(999),
     PythiaParameters = cms.PSet(
+        parameterSets = cms.vstring(
+            'pythia8CommonSettings',
+            'pythia8CP5Settings',
+            'pythia8BBBar4lSettings',
+            'pythia8PSweightsSettings',
+            'processParameters'
+        ),
         processParameters = cms.vstring(
             'TimeShower:mMaxGamma = 1.0',
             '6:m0 = 172.5'
@@ -143,13 +150,6 @@ process.generator = cms.EDFilter("Pythia8ConcurrentHadronizerFilter",
             'UncertaintyBands:overSampleISR = 10.0', 
             'UncertaintyBands:FSRpTmin2Fac = 20', 
             'UncertaintyBands:ISRpTmin2Fac = 1'
-        ),
-        parameterSets = cms.vstring(
-            'pythia8CommonSettings',
-            'pythia8CP5Settings',
-            'pythia8BBBar4lSettings',
-            'pythia8PSweightsSettings',
-            'processParameters'
         )
     ),
     comEnergy = cms.double(13000.0),
