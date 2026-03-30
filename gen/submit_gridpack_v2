@@ -9,6 +9,6 @@ RequestMemory = 3000
 RequestCpus = 1
 Request_OpSysAndVer = "RedHat9"
 +CondorPlatform = "$CondorPlatform: x86_64_RedHat9 $"
-+MySingularityImage = "/cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64"
++MySingularityImage = "/cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:x86_64"
 +MySingularityArgs = "--bind /tmp:/host/tmp"
 Queue 500
