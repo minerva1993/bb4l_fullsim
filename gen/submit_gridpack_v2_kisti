@@ -1,0 +1,14 @@
+JobBatchName = "run_gridpack_bb4l_nominal_v2"
+Executable  = /cms/ldap_home/minerva1993/bb4l_fullsim/gen/run_gridpack_kisti.sh
+Log         = /cms/ldap_home/minerva1993/bb4l_fullsim/gen/logs/log_$(Cluster)_$(Process).txt
+Output      = /cms/ldap_home/minerva1993/bb4l_fullsim/gen/logs/out_$(Cluster)_$(Process).txt
+Error       = /cms/ldap_home/minerva1993/bb4l_fullsim/gen/logs/err_$(Cluster)_$(Process).txt
+Args        = "1000 $(Cluster) $(Process) /cms/ldap_home/minerva1993/bb4l_fullsim/gen/gridpacks/b_bbar_4l_slc7_amd64_gcc700_CMSSW_10_6_39_bb4l_dl_nominal_allflavors_v2_noPDFWeights.tgz"
+RequestMemory = 4 GB
+RequestDisk = 2 GB
+RequestCpus = 1
+accounting_group=group_cms
+universe = container
+container_image = /cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64
++SingularityBind = "/cvmfs,/etc/condor,/cms,/cms_scratch,/var/lib/condor,/run/user,/tmp:/host/tmp,/etc/pki/ca-trust,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security,/cvmfs/grid.cern.ch/etc/grid-security/vomses:/etc/vomses,/etc/krb5.conf:/etc/krb5.conf"
+Queue 5000
