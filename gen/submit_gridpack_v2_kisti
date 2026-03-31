@@ -9,6 +9,6 @@ RequestDisk = 2 GB
 RequestCpus = 1
 accounting_group=group_cms
 universe = container
-container_image = /cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64
+container_image = /cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:x86_64
 +SingularityBind = "/cvmfs,/etc/condor,/cms,/cms_scratch,/var/lib/condor,/run/user,/tmp:/host/tmp,/etc/pki/ca-trust,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security,/cvmfs/grid.cern.ch/etc/grid-security/vomses:/etc/vomses,/etc/krb5.conf:/etc/krb5.conf"
 Queue 5000
