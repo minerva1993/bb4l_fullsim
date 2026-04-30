@@ -12,3 +12,4 @@ run_merge_twidth*
 x509up*
 *.lhe
 CMSSW*
+*pyc
