@@ -6,7 +6,7 @@ from Configuration.Eras.Era_Run2_2016_cff import Run2_2016
 options = VarParsing('analysis')
 options.parseArguments()
 
-process = cms.Process('GEN',Run2_2016)
+process = cms.Process('reGEN',Run2_2016)
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
