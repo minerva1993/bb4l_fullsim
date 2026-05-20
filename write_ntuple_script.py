@@ -8,11 +8,12 @@ parser.add_argument("-I", "--input", dest="input", type=str, default="", help="I
 parser.add_argument("-O", "--outfolder", dest="outfolder", type=str, default="", help="Output folder name")
 parser.add_argument("-W", "--width", dest="width", type=str, default="1p0", help="Width flag, 0p7 or 1p3")
 parser.add_argument("--workflow", dest="workflow", type=str, default="MC_bb4l_2018", help="Workflow name")
+parser.add_argument("-N", "--number", dest="number_start", type=int, default=0, help="Starting file number in case of sample addition")
 options = parser.parse_args()
 
 # Count the maximum file number; can be differ from number of files due to broken jobs
 
-n_files = 0
+n_files = options.number_start
 file_dict = OrderedDict()
 
 for f in os.listdir(options.input):
@@ -56,5 +57,6 @@ with open(output_file, "w") as out:
 
         out.write("\n")  # separate job blocks
 
-print("To submit", str(n_files), "files")
+#print("To submit", str(n_files), "files")
+print("To submit", str(len(file_dict.keys())), "files")
 print("Written submit file:", output_file)

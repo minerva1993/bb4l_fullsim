@@ -45,7 +45,7 @@ if check_missing:
         for i in range(njobs):
             out_file = os.path.join(options.output, "SIM_%s.root" % i)
 
-            if not os.path.exists(out_file):
+            if not os.path.exists(out_file) and i not in [p[1] for p in pairs]:
                 missing_numbers.append(str(i))
 
     elif "sim_to_mini" in options.input_file:
@@ -67,6 +67,9 @@ output_file = "re" + options.input_file
 job_proc = 0
 job_blocks = []
 
+print("MISSING")
+print(missing_numbers)
+
 with open(options.input_file) as f:
     blocks = f.readlines()
 
@@ -81,7 +84,7 @@ with open(options.input_file) as f:
                 if "gen_to_sim" in options.input_file and parts[-3] in missing_numbers:
                     pairs.append([options.output.split("out/")[-1].split("_")[0], job_proc])
                 elif "sim_to_mini" in options.input_file and parts[-3] in missing_numbers:
-                    pairs.append([options.output.split("out/")[-1].split("_")[0], job_proc])
+                    pairs.append([int(options.output.split("out/")[-1].split("_")[0]), job_proc])
 
         if line == "\n":
             job_blocks.append(tmp_lines)
@@ -90,6 +93,17 @@ with open(options.input_file) as f:
             continue
         tmp_lines.append(line)
 
+if "sim_to_mini" in options.input_file:
+    seen = set()
+    unique_lst = []
+
+    for x in pairs:
+        t = tuple(x)
+        if t not in seen:
+            seen.add(t)
+            unique_lst.append(x)
+
+    pairs = unique_lst
 
 print("To resubmit", len(pairs), "jobs")
 print(pairs)

@@ -18,7 +18,15 @@ file_list = os.listdir(options.input_folder)
 print('Cheking: ' + os.path.join(options.input_folder))
 
 
-for input_file in file_list:
+total = len(file_list)
+for i, input_file in enumerate(file_list, 1):
+
+    bar_width = 50
+    filled = int(bar_width * i / total)
+    bar = ">" * filled + " " * (bar_width - filled)
+    sys.stdout.write("\r[{}] {}/{} {:<50}".format(bar, i, total, input_file))
+    #sys.stdout.write("\r[{}/{}] Checking: {:<50}".format(i, total, input_file))
+    sys.stdout.flush()
 
     try:
         f = TFile.Open(os.path.join(options.input_folder, input_file))
@@ -36,3 +44,6 @@ for input_file in file_list:
     except:
         print("Cannot open the file ", input_file, " deleting...")
         #os.remove(input_file)
+
+sys.stdout.write("\n")
+sys.stdout.flush()
