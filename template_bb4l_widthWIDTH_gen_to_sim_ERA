@@ -1,9 +1,9 @@
 JobBatchName = "bb4l_widthWIDTH_gen_to_sim_ERA"
 Executable  = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/run_bb4l_ERA_gen_to_sim.sh
-Log         = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/log_$(Cluster)_$(Process).txt
-Output      = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/out_$(Cluster)_$(Process).txt
-Error       = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/err_$(Cluster)_$(Process).txt
-Args        = "INPUT FILENUMBER SKIPEVENT MAXEVENT OUTNUMBER $(Cluster) $(Process)"
+Log         = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/log_widthWIDTH_gen_to_sim_OUTNUMBER.txt
+Output      = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/out_widthWIDTH_gen_to_sim_OUTNUMBER.txt
+Error       = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs/err_widthWIDTH_gen_to_sim_OUTNUMBER.txt
+Args        = "INPUT FILENUMBER SKIPEVENT MAXEVENT OUTNUMBER"
 +RequestRuntime = 604800
 RequestMemory = 4096
 RequestCpus = 1

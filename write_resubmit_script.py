@@ -10,20 +10,48 @@ parser.add_argument("-O", "--output", dest="output", type=str, default="", help=
 options = parser.parse_args()
 
 check_missing = False
+width = ""
+if "0p7" in options.input_file:
+    width = "0p7"
+elif "1p3" in options.input_file:
+    width = "1p3"
 
 if not sys.stdin.isatty():
     for line in sys.stdin:
         fname = line.strip()
 
-        # match err_Cluster_Process.txt
-        m = re.search(r"err_(\d+)_(\d+)\.txt$", fname)
+        if "gen_to_sim" in options.input_file:
+            # match err_Cluster_Process.txt
+            m = re.search(r"err_width"+width+"_gen_to_sim_(\d+)\.txt$", fname)
 
-        if "_2.txt" in fname:
-            m = re.search(r"err_(\d+)_(\d+)\_2.txt$", fname)
-        if m:
-            cluster = int(m.group(1))
-            process = int(m.group(2))
-            pairs.append([cluster, process])
+            if "_2.txt" in fname:
+                m = re.search(r"err_width"+width+"_gen_to_sim_(\d+)\_2.txt$", fname)
+            if m:
+                cluster = str("width"+width+"_gen_to_sim")
+                process = int(m.group(1))
+                pairs.append([cluster, process])
+
+        elif "sim_to_mini" in options.input_file:
+            # match err_Cluster_Process.txt
+            m = re.search(r"err_width"+width+"_sim_to_mini_(\d+)\.txt$", fname)
+
+            if "_2.txt" in fname:
+                m = re.search(r"err_width"+width+"_sim_to_mini_(\d+)\_2.txt$", fname)
+            if m:
+                cluster = str("width"+width+"_sim_to_mini")
+                process = int(m.group(1))
+                pairs.append([cluster, process])
+
+        else:
+            # match err_Cluster_Process.txt
+            m = re.search(r"err_(\d+)_(\d+)\.txt$", fname)
+
+            if "_2.txt" in fname:
+                m = re.search(r"err_(\d+)_(\d+)\_2.txt$", fname)
+            if m:
+                cluster = int(m.group(1))
+                process = int(m.group(2))
+                pairs.append([cluster, process])
 
 if len(pairs) < 1 or len(options.output) > 0:
     check_missing = True
@@ -81,10 +109,10 @@ with open(options.input_file) as f:
             if line.startswith("Args"):
                 content = line.split('"')[1]
                 parts = content.split()
-                if "gen_to_sim" in options.input_file and parts[-3] in missing_numbers:
-                    pairs.append([options.output.split("out/")[-1].split("_")[0], job_proc])
-                elif "sim_to_mini" in options.input_file and parts[-3] in missing_numbers:
-                    pairs.append([int(options.output.split("out/")[-1].split("_")[0]), job_proc])
+                if "gen_to_sim" in options.input_file and parts[-1] in missing_numbers:
+                    pairs.append(["width"+width+"_gen_to_sim", job_proc])
+                elif "sim_to_mini" in options.input_file and parts[-1] in missing_numbers:
+                    pairs.append(["width"+width+"_sim_to_mini", job_proc])
 
         if line == "\n":
             job_blocks.append(tmp_lines)
@@ -131,6 +159,7 @@ with open(output_file, "w") as out:
                     to_remove.append(parts[1])
                 #line += 'requirements = (Machine =!= "batch1559.desy.de") && (Machine =!= "batch1166.desy.de")\n'
 
+            # Cluster and Process would not exist in Args
             line = line.replace("$(Cluster)", str(cluster))
             line = line.replace("$(Process)", str(process))
             if line.strip().startswith(("Log", "Output", "Error")):

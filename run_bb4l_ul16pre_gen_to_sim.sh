@@ -5,8 +5,6 @@ FILENUMBER=$2
 SKIPEVENT=$3
 MAXEVENT=$4
 OUTNUMBER=$5
-CLUSTER=$6
-PROCESS=$7
 
 echo "starting"
 echo "shell" $0
@@ -18,7 +16,7 @@ source /cvmfs/cms.cern.ch/cmsset_default.sh
 
 INPUT_FOLDER=$(basename "$INPATH")
 
-NFS_OUT_SIM=`realpath .`/out/${CLUSTER}_${INPUT_FOLDER}_SIM
+NFS_OUT_SIM=`realpath .`/out/${INPUT_FOLDER}_SIM
 mkdir -p $NFS_OUT_SIM
 echo ${NFS_OUT_SIM}
 

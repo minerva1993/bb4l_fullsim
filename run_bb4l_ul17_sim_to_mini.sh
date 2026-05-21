@@ -2,8 +2,6 @@
 
 INPATH=$1
 FILENUMBER=$2
-CLUSTER=$3
-PROCESS=$4
 
 echo "starting"
 echo "shell" $0
@@ -18,7 +16,7 @@ voms-proxy-info --timeleft
 
 INPUT_FOLDER=$(basename "$INPATH")
 
-NFS_OUT=`realpath .`/out/${CLUSTER}_${INPUT_FOLDER}_MINI
+NFS_OUT=`realpath .`/out/${INPUT_FOLDER}_MINI
 mkdir -p $NFS_OUT
 echo ${NFS_OUT}
 

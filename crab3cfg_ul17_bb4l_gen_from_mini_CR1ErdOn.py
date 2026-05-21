@@ -25,5 +25,5 @@ config.Data.ignoreLocality = False
 config.Data.splitting = 'FileBased'
 config.Data.inputDataset = '/BBLLNuNu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL17MiniAODv2-bb4l_v2_106X_mc2017_realistic_v9-v2/MINIAODSIM'
 config.Data.outputDatasetTag = 'RunIISummer20UL17reGEN_CR1ErdOn-bb4l_v2_106X_mc2017_realistic_v6-v1'
-config.Data.outLFNDirBase = '/store/user/jipark/bb4l_privateSim/CP1ErdOn/UL17/LHEGEN'
+config.Data.outLFNDirBase = '/store/user/jipark/bb4l_privateSim/CR1ErdOn/UL17/LHEGEN'
 config.Data.unitsPerJob = 1
