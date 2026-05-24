@@ -53,7 +53,7 @@ with open(output_file, "w") as out:
 
             if line.startswith("Log") or line.startswith("Output") or line.startswith("Error"):
                 line = line.replace("WIDTH", options.width)\
-                           .replace("OUTNUMBER", str(int(n_files * n_jobs_per_file) + j))
+                           .replace("FILENUMBER",  str(i))
 
 
             if line.strip().startswith("Queue"):

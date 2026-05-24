@@ -95,7 +95,7 @@ output_file = "re" + options.input_file
 job_proc = 0
 job_blocks = []
 
-print("MISSING")
+print("MISSING ", str(len(missing_numbers)), " files")
 print(missing_numbers)
 
 with open(options.input_file) as f:
