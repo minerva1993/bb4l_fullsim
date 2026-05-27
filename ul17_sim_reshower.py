@@ -2,12 +2,12 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: --python_filename ul18_sim.py --eventcontent RAWSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM --fileout file:SIM.root --conditions 106X_upgrade2018_realistic_v11_L1v1 --beamspot Realistic25ns13TeVEarly2018Collision --customise_commands=process.MessageLogger.cerr.FwkReport.reportEvery=200 --step SIM --geometry DB:Extended --filein file:GEN.root --era Run2_2018 --runUnscheduled --no_exec --mc -n -1
+# with command line options: --python_filename ul17_sim.py --eventcontent RAWSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM --fileout file:SIM.root --conditions 106X_mc2017_realistic_v6 --beamspot Realistic25ns13TeVEarly2017Collision --customise_commands=process.MessageLogger.cerr.FwkReport.reportEvery=200 --step SIM --geometry DB:Extended --filein file:GEN.root --era Run2_2017 --runUnscheduled --no_exec --mc -n -1
 import FWCore.ParameterSet.Config as cms
 
-from Configuration.Eras.Era_Run2_2018_cff import Run2_2018
+from Configuration.Eras.Era_Run2_2017_cff import Run2_2017
 
-process = cms.Process('reSIM',Run2_2018)
+process = cms.Process('reSIM',Run2_2017)
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -63,7 +63,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
 # Other statements
 process.XMLFromDBSource.label = cms.string("Extended")
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '106X_upgrade2018_realistic_v11_L1v1', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '106X_mc2017_realistic_v6', '')
 
 # Path and EndPath definitions
 process.simulation_step = cms.Path(process.psim)
