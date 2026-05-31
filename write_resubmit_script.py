@@ -93,7 +93,7 @@ if check_missing:
 output_file = "re" + options.input_file
 
 job_proc = 0
-job_blocks = []
+job_blocks = {}
 
 print("MISSING ", str(len(missing_numbers)), " files")
 print(missing_numbers)
@@ -101,8 +101,15 @@ print(missing_numbers)
 with open(options.input_file) as f:
     blocks = f.readlines()
 
+    result_outnumber = 0
+
     tmp_lines = []
     for line in blocks:
+
+        if line.startswith("Args"):
+            content = line.split('"')[1]
+            parts = content.split()
+            result_outnumber = int(parts[-1])
 
         if len(missing_numbers) > 0: #do this only for missing file check
             #line = line.strip()
@@ -115,9 +122,8 @@ with open(options.input_file) as f:
                     pairs.append(["width"+width+"_sim_to_mini", job_proc])
 
         if line == "\n":
-            job_blocks.append(tmp_lines)
+            job_blocks[result_outnumber] = tmp_lines
             tmp_lines = []
-            job_proc += 1
             continue
         tmp_lines.append(line)
 
