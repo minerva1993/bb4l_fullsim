@@ -77,7 +77,7 @@ for (dpath, i) in lhe_files:
 
         for line in template:
             if line.startswith("JobBatchName"):
-                line = line.replace("UNC", options.width).replace("ERA", options.year)
+                line = line.replace("UNC", options.width).replace("ERA", options.year + '_part' + str(submit_index))
             if line.startswith("Executable"):
                 line = line.replace("ERA", options.year)\
                            .replace("UNC", options.width)

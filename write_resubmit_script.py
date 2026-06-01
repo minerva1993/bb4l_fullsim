@@ -7,14 +7,17 @@ pairs = []
 parser = argparse.ArgumentParser(usage="%prog [options]")
 parser.add_argument("-I", "--input", dest="input_file", type=str, default="", help="Input submission script")
 parser.add_argument("-O", "--output", dest="output", type=str, default="", help="output folder, optional for root file existence check")
+parser.add_argument("--minjobid", dest="minjobid", type=int, default=0, help="Max jobid for checking missing files")
 options = parser.parse_args()
 
 check_missing = False
-width = ""
+unc = ""
 if "0p7" in options.input_file:
-    width = "0p7"
+    unc = "width0p7"
 elif "1p3" in options.input_file:
-    width = "1p3"
+    unc = "width1p3"
+elif "recoil3" in options.input_file:
+    unc = "recoil3"
 
 if not sys.stdin.isatty():
     for line in sys.stdin:
@@ -22,23 +25,24 @@ if not sys.stdin.isatty():
 
         if "gen_to_sim" in options.input_file:
             # match err_Cluster_Process.txt
-            m = re.search(r"err_width"+width+"_gen_to_sim_(\d+)\.txt$", fname)
+            m = re.search(r"err_"+unc+"_gen_to_sim_(\d+)\.txt$", fname)
 
             if "_2.txt" in fname:
-                m = re.search(r"err_width"+width+"_gen_to_sim_(\d+)\_2.txt$", fname)
+                m = re.search(r"err_"+unc+"_gen_to_sim_(\d+)\_2.txt$", fname)
+
             if m:
-                cluster = str("width"+width+"_gen_to_sim")
+                cluster = str(unc+"_gen_to_sim")
                 process = int(m.group(1))
                 pairs.append([cluster, process])
 
         elif "sim_to_mini" in options.input_file:
             # match err_Cluster_Process.txt
-            m = re.search(r"err_width"+width+"_sim_to_mini_(\d+)\.txt$", fname)
+            m = re.search(r"err_"+unc+"_sim_to_mini_(\d+)\.txt$", fname)
 
             if "_2.txt" in fname:
-                m = re.search(r"err_width"+width+"_sim_to_mini_(\d+)\_2.txt$", fname)
+                m = re.search(r"err_"+unc+"_sim_to_mini_(\d+)\_2.txt$", fname)
             if m:
-                cluster = str("width"+width+"_sim_to_mini")
+                cluster = str(unc+"_sim_to_mini")
                 process = int(m.group(1))
                 pairs.append([cluster, process])
 
@@ -63,14 +67,14 @@ if check_missing:
 
     if "gen_to_sim" in options.input_file:
 
-        njobs = 0
+        max_jobid = options.minjobid
 
         with open(options.input_file) as f:
             for line in f:
                 if "Queue" in line:
-                    njobs += 1
+                    max_jobid += 1
 
-        for i in range(njobs):
+        for i in range(options.minjobid, max_jobid):
             out_file = os.path.join(options.output, "SIM_%s.root" % i)
 
             if not os.path.exists(out_file) and i not in [p[1] for p in pairs]:
@@ -92,7 +96,6 @@ if check_missing:
 
 output_file = "re" + options.input_file
 
-job_proc = 0
 job_blocks = {}
 
 print("MISSING ", str(len(missing_numbers)), " files")
@@ -117,9 +120,9 @@ with open(options.input_file) as f:
                 content = line.split('"')[1]
                 parts = content.split()
                 if "gen_to_sim" in options.input_file and parts[-1] in missing_numbers:
-                    pairs.append(["width"+width+"_gen_to_sim", job_proc])
+                    pairs.append([unc+"_gen_to_sim", result_outnumber])
                 elif "sim_to_mini" in options.input_file and parts[-1] in missing_numbers:
-                    pairs.append(["width"+width+"_sim_to_mini", job_proc])
+                    pairs.append([unc+"_sim_to_mini", result_outnumber])
 
         if line == "\n":
             job_blocks[result_outnumber] = tmp_lines
