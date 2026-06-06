@@ -4,15 +4,14 @@ import re
 import argparse
 
 parser = argparse.ArgumentParser(usage="%prog [options]")
-parser.add_argument("-Y", "--year",      dest="year",      type=str, default="",    help="Select ul16apv, ul16, ul17, or ul18")
-parser.add_argument("-I", "--input",     dest="input",     type=str, default="",    help="Input LHE folder name")
-parser.add_argument("-W", "--width",     dest="width",     type=str, default="1p0", help="Uncertainty flag")
-parser.add_argument("-M", "--maxevents", dest="maxevents", type=int, default=1000,  help="Max number of events per condor job")
+parser.add_argument("-Y", "--year", dest="year", type=str, default="", help="Select ul16apv, ul16, ul17, or ul18")
+parser.add_argument("-I", "--input", dest="input", type=str, default="", help="Input LHE folder name")
+parser.add_argument("-W", "--width", dest="width", type=str, default="1p0", help="Uncertainty flag")
+parser.add_argument("-M", "--maxevents", dest="maxevents", type=int, default=1000, help="Max N events per job")
 options = parser.parse_args()
 
 JOBS_PER_SUBMIT = 4000
 
-# --- collect all (subdir, file_index) pairs ---
 pattern = re.compile(r"^LHE_(\d+)\.lhe$")
 lhe_files = []
 
@@ -27,7 +26,7 @@ for d in sorted(os.listdir(options.input)):
 
 lhe_files.sort(key=lambda x: (x[0], x[1]))
 
-# --- count events per file individually ---
+
 def count_events(filepath):
     n = 0
     with open(filepath, "r") as f:
@@ -36,7 +35,7 @@ def count_events(filepath):
                 n += 1
     return n
 
-# --- load template ---
+
 input_file = "template_bb4l_UNC_gen_to_sim_ERA"
 base_output = ("template_bb4l_UNC_gen_to_sim_ERA"
                .replace("template", "submit")
@@ -46,7 +45,7 @@ base_output = ("template_bb4l_UNC_gen_to_sim_ERA"
 with open(input_file) as f:
     template = f.readlines()
 
-# --- iterate and write, splitting every JOBS_PER_SUBMIT jobs ---
+
 submit_index        = 0
 jobs_in_file        = 0
 global_job_num      = 0

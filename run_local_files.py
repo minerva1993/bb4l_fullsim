@@ -58,6 +58,22 @@ WORKFLOWS_DICT = {
     'ignoreDupl=1',
     'era=2018'
   ],
+  'MC_bb4l_2018_recoil3': [
+    'files=file:INPUTFILE',
+    'datasetName=BBLLNuNu_TuneCP5_recoilToTop_13TeV-powheg-pythia8',
+    'samplename=ttbartwbb4linclusive',
+    'generatorName=powhegPythia',
+    'outputFile=PATH/ttbartwbb4linclusive_recoiltotop_OUTNUMBER.root',
+    'pyconf=ttbartwbb4l_recoiltotop_2018.py',
+    'systematicsName=RECOILTOTOP',
+    'includeMEWeights=True',
+    'includePDFWeights=True',
+    'includePSWeights=False',
+    'includeBFragWeights=True',
+    'ignoreDupl=1',
+    'era=2018'
+  ],
+
 }
 
 ### --------------------------------------------------

@@ -1,8 +1,8 @@
-JobBatchName = "bb4l_widthWIDTH_mini_to_ntuple"
+JobBatchName = "bb4l_UNC_mini_to_ntuple"
 Executable  = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/run_local_files.sh
-Log         = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_ntuple/log_widthWIDTH_OUTNUMBER.txt
-Output      = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_ntuple/out_widthWIDTH_OUTNUMBER.txt
-Error       = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_ntuple/err_widthWIDTH_OUTNUMBER.txt
+Log         = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_ntuple/log_UNC_OUTNUMBER.txt
+Output      = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_ntuple/out_UNC_OUTNUMBER.txt
+Error       = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_ntuple/err_UNC_OUTNUMBER.txt
 Args        = "INFILE OUTFOLDER WORKFLOW OUTNUMBER"
 +RequestRuntime = 21600
 RequestMemory = 4096

@@ -30,8 +30,8 @@ sorted_values = sorted(file_dict.values(), key=lambda x: [int(n) for n in re.fin
 
 file_dict = OrderedDict(zip(file_dict.keys(), sorted_values))
 
-input_file = "template_bb4l_widthWIDTH_mini_to_ntuple_ERA"
-output_file = "template_bb4l_widthWIDTH_mini_to_ntuple_ERA".replace("template", "submit").replace("WIDTH", options.width).replace("ERA", options.year)
+input_file = "template_bb4l_UNC_mini_to_ntuple_ERA"
+output_file = "template_bb4l_UNC_mini_to_ntuple_ERA".replace("template", "submit").replace("UNC", options.width).replace("ERA", options.year)
 
 with open(input_file) as f:
     template = f.readlines()
@@ -43,7 +43,7 @@ with open(output_file, "w") as out:
         for line in template:
 
             if line.startswith("JobBatchName"):
-                line = line.replace("WIDTH", options.width).replace("ERA", options.year)
+                line = line.replace("UNC", options.width).replace("ERA", options.year)
 
             if line.startswith("Executable"):
                 line = line.replace("ERA", options.year)
@@ -55,7 +55,7 @@ with open(output_file, "w") as out:
                            .replace("WORKFLOW", options.workflow)
 
             if line.startswith("Log") or line.startswith("Output") or line.startswith("Error"):
-                line = line.replace("WIDTH", options.width)\
+                line = line.replace("UNC", options.width)\
                            .replace("OUTNUMBER", str(i))
 
             if line.strip().startswith("Queue"):

@@ -7,18 +7,27 @@ import argparse
 parser = argparse.ArgumentParser(description="Create edmCopyPickMerge script")
 parser.add_argument("-I", "--input", required=True, help="Input directory containing ntuple files")
 parser.add_argument("-N", "--chunk-size", type=int, default=20, help="Number of files per merge (default: 100)")
+parser.add_argument("-W", "--width", type=str, default="", help="Unc name")
 options = parser.parse_args()
 
 
 # check width string
 m_width = re.search(r'(twidthx[0-9p]+)', options.input)
-if not m_width:
+if not m_width and len(options.width) == 0:
     print("Cannot find twidth in directory name")
     exit(1)
 
-twidth_tag = m_width.group(1)
+if m_width:
+    unc_tag = m_width.group(1)
 
-output_script = "run_ntuple_merge_%s.sh" % twidth_tag
+elif len(options.width) > 0:
+    unc_tag = options.width
+
+else:
+    print("Cannot define uncertainty name!!")
+    exit(1)
+
+output_script = "run_ntuple_merge_%s.sh" % unc_tag
 
 # Get file list
 files = []

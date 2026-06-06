@@ -7,7 +7,7 @@ pairs = []
 parser = argparse.ArgumentParser(usage="%prog [options]")
 parser.add_argument("-I", "--input", dest="input_file", type=str, default="", help="Input submission script")
 parser.add_argument("-O", "--output", dest="output", type=str, default="", help="output folder, optional for root file existence check")
-parser.add_argument("--minjobid", dest="minjobid", type=int, default=0, help="Max jobid for checking missing files")
+parser.add_argument("--minjobid", dest="minjobid", type=int, default=0, help="Starting jobid for checking missing files")
 options = parser.parse_args()
 
 check_missing = False

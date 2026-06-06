@@ -1,8 +1,8 @@
-JobBatchName = "bb4l_widthWIDTH_sim_to_mini"
+JobBatchName = "bb4l_UNC_sim_to_mini"
 Executable  = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/run_bb4l_ERA_sim_to_mini.sh
-Log         = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_mini/log_widthWIDTH_sim_to_mini_FILENUMBER.txt
-Output      = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_mini/out_widthWIDTH_sim_to_mini_FILENUMBER.txt
-Error       = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_mini/err_widthWIDTH_sim_to_mini_FILENUMBER.txt
+Log         = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_mini/log_UNC_sim_to_mini_FILENUMBER.txt
+Output      = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_mini/out_UNC_sim_to_mini_FILENUMBER.txt
+Error       = /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/logs_mini/err_UNC_sim_to_mini_FILENUMBER.txt
 Args        = "INPUT FILENUMBER"
 +RequestRuntime = 604800
 RequestMemory = 4096
