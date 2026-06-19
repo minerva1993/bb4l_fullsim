@@ -13,6 +13,51 @@ def EXE(cmd, suspend=True, verbose=False, dry_run=False):
     return _exitcode
 
 WORKFLOWS_DICT = {
+  'MC_bb4l_2017': [
+    'files=file:INPUTFILE',
+    'datasetName=BBLLNuNu_TuneCP5_13TeV-powheg-pythia8',
+    'samplename=ttbartwbb4linclusive',
+    'generatorName=powhegPythia',
+    'outputFile=PATH/ttbartwbb4linclusive_OUTNUMBER.root',
+    'pyconf=ttbartwbb4l_2017.py',
+    'includePDFWeights=1',
+    'includeMEWeights=1',
+    'includePSWeights=0',
+    'includeBFragWeights=1',
+    'includeMLHdampWeights=1',
+    'includeMLBFragWeights=1',
+    'era=2017'
+  ],
+  'MC_bb4l_2017_twidthx0p7': [
+    'files=file:INPUTFILE',
+    'datasetName=BBLLNuNu_Width-x0p7_TuneCP5_13TeV-powheg-pythia8',
+    'samplename=ttbartwbb4linclusive',
+    'generatorName=powhegPythia',
+    'outputFile=PATH/ttbartwbb4linclusive_0p7_widthdown_OUTNUMBER.root',
+    'pyconf=ttbartwbb4l_twidthx0p7_2017.py',
+    'systematicsName=WIDTH_DOWN',
+    'includeMEWeights=True',
+    'includePDFWeights=True',
+    'includePSWeights=False',
+    'includeBFragWeights=True',
+    'ignoreDupl=1',
+    'era=2017'
+  ],
+  'MC_bb4l_2017_twidthx1p3': [
+    'files=file:INPUTFILE',
+    'datasetName=BBLLNuNu_Width-x1p3_TuneCP5_13TeV-powheg-pythia8',
+    'samplename=ttbartwbb4linclusive',
+    'generatorName=powhegPythia',
+    'outputFile=PATH/ttbartwbb4linclusive_1p3_widthup_OUTNUMBER.root',
+    'pyconf=ttbartwbb4l_twidthx1p3_2017.py',
+    'systematicsName=WIDTH_UP',
+    'includeMEWeights=True',
+    'includePDFWeights=True',
+    'includePSWeights=False',
+    'includeBFragWeights=True',
+    'ignoreDupl=1',
+    'era=2017'
+  ],
   'MC_bb4l_2018': [
     'files=file:INPUTFILE',
     'datasetName=BBLLNuNu_TuneCP5_13TeV-powheg-pythia8',

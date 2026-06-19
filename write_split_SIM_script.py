@@ -41,7 +41,7 @@ if(options.maxevents > n_events):
     sys.exit()
 if isinstance(n_jobs_per_file, int):
     pass
-elif isinstance(x, float):
+elif isinstance(n_jobs_per_file, float):
     if n_jobs_per_file.is_integer():
         pass
     else:

@@ -9,6 +9,7 @@ parser.add_argument("-I", "--input", required=True, help="Input directory contai
 parser.add_argument("-N", "--chunk-size", type=int, default=100, help="Number of files per merge (default: 100)")
 parser.add_argument("-S", "--split", type=int, default=5, help="Number of scripts to split jobs")
 parser.add_argument("-W", "--width", type=str, default="", help="Unc name")
+parser.add_argument("-Y", "--year", dest="year", type=str, default="", help="Select ul16apv, ul16, ul17, or ul18")
 options = parser.parse_args()
 
 
@@ -57,7 +58,7 @@ files = [f[1] for f in files]
 
 chunks = [files[i:i+options.chunk_size] for i in range(0, len(files), options.chunk_size)]
 
-out_folder = "miniaodv2_%s" % unc_tag
+out_folder = "miniaodv2_%s_%s" % (options.year, unc_tag)
 if not os.path.exists(out_folder):
     os.makedirs(out_folder)
 
