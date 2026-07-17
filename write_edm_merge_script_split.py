@@ -6,10 +6,12 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Create edmCopyPickMerge script")
 parser.add_argument("-I", "--input", required=True, help="Input directory containing MINIv2_X.root files")
+parser.add_argument("--second-input", type=str, default="", help="Second input directory containing MINIv2_X.root files")
 parser.add_argument("-N", "--chunk-size", type=int, default=100, help="Number of files per merge (default: 100)")
 parser.add_argument("-S", "--split", type=int, default=5, help="Number of scripts to split jobs")
 parser.add_argument("-W", "--width", type=str, default="", help="Unc name")
 parser.add_argument("-Y", "--year", dest="year", type=str, default="", help="Select ul16apv, ul16, ul17, or ul18")
+parser.add_argument("--minfilenum", dest="minfilenum", type=int, default=0, help="Starting file number for additional files")
 options = parser.parse_args()
 
 
@@ -47,7 +49,13 @@ files = []
 for f in os.listdir(options.input):
     m = pattern.match(f)
     if m:
-        files.append((int(m.group(1)), f))
+        files.append((int(m.group(1)), os.path.join(options.input, f)))
+
+if len(options.second_input) > 0:
+    for f in os.listdir(options.second_input):
+        m = pattern.match(f)
+        if m:
+            files.append((int(m.group(1)), os.path.join(options.second_input, f)))
 
 if not files:
     print("No MINIv2_X.root files found.")
@@ -66,9 +74,10 @@ if not os.path.exists(out_folder):
 cmds = []
 for i, chunk in enumerate(chunks):
     input_string = ",".join(
-        ["file:%s" % (os.path.join(options.input, f)) for f in chunk]
+        #["file:%s" % (os.path.join(options.input, f)) for f in chunk]
+        ["file:%s" % (f) for f in chunk]
     )
-    output_file = "merged_%s_%s_%d.root" % (unc_tag, job_number, i)
+    output_file = "merged_%s_%s_%d.root" % (unc_tag, job_number, i + options.minfilenum)
     cmd = (
         "cmsRun copyPickMerge_cfg.py "
         "inputFiles=%s "

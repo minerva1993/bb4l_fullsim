@@ -40,6 +40,8 @@ cp ${INPATH}/SIM_${FILENUMBER}.root ./SIM.root
 #cmsRun ul18_digipremix.py
 mv ../../ul18_digipremix_IIHE.py .
 cmsRun ul18_digipremix_IIHE.py
+#mv ../../ul18_digipremix_cern.py .
+#cmsRun ul18_digipremix_cern.py
 mv Premix.root ../../
 cd ../../
 

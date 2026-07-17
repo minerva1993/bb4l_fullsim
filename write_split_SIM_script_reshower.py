@@ -4,7 +4,7 @@ import re
 import argparse
 
 parser = argparse.ArgumentParser(usage="%prog [options]")
-parser.add_argument("-Y", "--year", dest="year", type=str, default="", help="Select ul16apv, ul16, ul17, or ul18")
+parser.add_argument("-Y", "--year", dest="year", type=str, default="", help="Select ul16pre, ul16post, ul17, or ul18")
 parser.add_argument("-I", "--input", dest="input", type=str, default="", help="Input LHE folder name")
 parser.add_argument("-W", "--width", dest="width", type=str, default="1p0", help="Uncertainty flag")
 parser.add_argument("-M", "--maxevents", dest="maxevents", type=int, default=1000, help="Max N events per job")
@@ -76,7 +76,7 @@ for (dpath, i) in lhe_files:
 
         for line in template:
             if line.startswith("JobBatchName"):
-                line = line.replace("UNC", options.width).replace("ERA", options.year + '_part' + str(submit_index))
+                line = line.replace("UNC", options.width).replace("ERA", options.year + '_part' + str(submit_index-1))
             if line.startswith("Executable"):
                 line = line.replace("ERA", options.year)\
                            .replace("UNC", options.width)

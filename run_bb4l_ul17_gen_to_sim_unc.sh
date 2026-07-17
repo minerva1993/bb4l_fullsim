@@ -6,7 +6,7 @@ SKIPEVENT=$3
 MAXEVENT=$4
 OUTNUMBER=$5
 
-SCRIPT=ul18_bb4l_gen_from_lhe_recoil3_py8315.py
+SCRIPT=ul17_bb4l_gen_from_lhe_recoil3_py8315.py
 
 echo "starting"
 echo "shell" $0
@@ -30,10 +30,10 @@ RUNDIR=`mktemp -d -p ${TMPDIR}`
 echo "Run directory: ${RUNDIR}"
 cd $RUNDIR
 
-cp /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/ul18*.py .
+cp /data/dust/user/jipark/production/bb4l_studies/bb4l_fullsim/ul17*.py .
 
 
-# GEN: https://cms-pdmv-prod.web.cern.ch/mcm/requests?prepid=TOP-RunIISummer20UL18wmLHEGEN-00725&page=0&shown=127
+# GEN: https://cms-pdmv-prod.web.cern.ch/mcm/requests?prepid=TOP-RunIISummer20UL17wmLHEGEN-00731&page=0&shown=127
 #cd /data/dust/user/jipark/production/bb4l_studies/CMSSW_10_6_48_pythia8313/src/run/
 cd /data/dust/user/jipark/production/bb4l_studies/CMSSW_10_6_48_pythia8315/src/run/
 eval `scram runtime -sh`
@@ -49,14 +49,14 @@ cmsRun "${SCRIPT}" skip=${SKIPEVENT} nEvents=${MAXEVENT} inputFiles=file:${INPAT
 mv GEN_${OUTNUMBER}.root $RUNDIR/GEN.root
 cd $RUNDIR
 
-# SIM: https://cms-pdmv-prod.web.cern.ch/mcm/requests?prepid=TOP-RunIISummer20UL18SIM-00597&page=0&shown=127
+# SIM: https://cms-pdmv-prod.web.cern.ch/mcm/requests?prepid=TOP-RunIISummer20UL17SIM-00617&page=0&shown=127
 scram p CMSSW CMSSW_10_6_17_patch1
 cd CMSSW_10_6_17_patch1/src
 eval `scram runtime -sh`
 
 mv ../../GEN.root .
-mv ../../ul18_sim.py .
-cmsRun ul18_sim.py
+mv ../../ul17_sim.py .
+cmsRun ul17_sim.py
 cp SIM.root ${NFS_OUT_SIM}/SIM_${OUTNUMBER}.root
 cd ../../
 

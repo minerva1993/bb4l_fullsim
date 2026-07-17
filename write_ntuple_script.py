@@ -11,6 +11,7 @@ parser.add_argument("-O", "--outfolder", dest="outfolder", type=str, default="",
 parser.add_argument("-W", "--width", dest="width", type=str, default="1p0", help="Width flag, 0p7 or 1p3")
 parser.add_argument("--workflow", dest="workflow", type=str, default="MC_bb4l_2018", help="Workflow name")
 parser.add_argument("-N", "--number", dest="number_start", type=int, default=0, help="Starting file number in case of sample addition")
+parser.add_argument("--min_input_number", dest="input_number_start", type=int, default=0, help="Starting INPUT file number in case of sample addition")
 options = parser.parse_args()
 
 # Count the maximum file number; can be differ from number of files due to broken jobs
@@ -22,6 +23,9 @@ for f in os.listdir(options.input):
     if f.endswith("root"):
         if options.jobid > 0:
             if str(options.jobid) not in f: continue
+        if options.input_number_start > 0:
+            if int(f.split("/")[-1].split("_")[-1].replace(".root", "")) < options.input_number_start:
+                continue
         fullpath = os.path.join(options.input, f)
         file_dict[n_files] = fullpath
         n_files += 1
@@ -32,6 +36,9 @@ file_dict = OrderedDict(zip(file_dict.keys(), sorted_values))
 
 input_file = "template_bb4l_UNC_mini_to_ntuple_ERA"
 output_file = "template_bb4l_UNC_mini_to_ntuple_ERA".replace("template", "submit").replace("UNC", options.width).replace("ERA", options.year)
+
+if not os.path.exists(options.outfolder):
+    os.makedirs(options.outfolder)
 
 with open(input_file) as f:
     template = f.readlines()
